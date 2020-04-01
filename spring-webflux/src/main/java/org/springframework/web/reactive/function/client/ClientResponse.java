@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2019 the original author or authors.
+ * Copyright 2002-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -197,12 +197,23 @@ public interface ClientResponse {
 	Mono<ResponseEntity<Void>> toBodilessEntity();
 
 	/**
-	 * Creates a {@link WebClientResponseException} based on the status code,
-	 * headers, and body of this response as well as the corresponding request.
-	 * @return a {@code Mono} with a {@code WebClientResponseException} based on this response
+	 * Create a {@link WebClientResponseException} that contains the response
+	 * status, headers, body, and the originating request.
+	 * @return a {@code Mono} with the created exception
 	 * @since 5.2
 	 */
 	Mono<WebClientResponseException> createException();
+
+	/**
+	 * Return a log message prefix to use to correlate messages for this exchange.
+	 * The prefix is based on {@linkplain ClientRequest#logPrefix()}, which
+	 * itself is based on the value of the {@link ClientRequest#LOG_ID_ATTRIBUTE
+	 * LOG_ID_ATTRIBUTE} request attribute, further surrounded with "[" and "]".
+	 * @return the log message prefix or an empty String if the
+	 * {@link ClientRequest#LOG_ID_ATTRIBUTE LOG_ID_ATTRIBUTE} is not set.
+	 * @since 5.2.3
+	 */
+	String logPrefix();
 
 
 	// Static builder methods

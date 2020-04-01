@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2019 the original author or authors.
+ * Copyright 2002-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -134,8 +134,8 @@ final class SynthesizedMergedAnnotationInvocationHandler<A extends Annotation> i
 	}
 
 	private int getValueHashCode(Object value) {
-		// Use Arrays.hashCode since ObjectUtils doesn't comply to to
-		// Annotation#hashCode()
+		// Use Arrays.hashCode(...) since Spring's ObjectUtils doesn't comply
+		// with the requirements specified in Annotation#hashCode().
 		if (value instanceof boolean[]) {
 			return Arrays.hashCode((boolean[]) value);
 		}
@@ -184,6 +184,9 @@ final class SynthesizedMergedAnnotationInvocationHandler<A extends Annotation> i
 	}
 
 	private static boolean isVisible(ClassLoader classLoader, Class<?> interfaceClass) {
+		if (classLoader == interfaceClass.getClassLoader()) {
+			return true;
+		}
 		try {
 			return Class.forName(interfaceClass.getName(), false, classLoader) == interfaceClass;
 		}
