@@ -330,6 +330,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 							throw ex;
 						}
 					});
+
+					// factorybean在这里处理
 					bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
 				}
 

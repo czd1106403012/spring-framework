@@ -703,6 +703,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * <p>Must be called before singleton instantiation.
 	 */
 	protected void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
+
+		// 处理BeanFactoryPostProcessor，BeanDefinitionRegistryPostProcessor集成处理BeanFactoryPostProcessor，
+		// BeanDefinitionRegistryPostProcessor用于注册BeanDefinition，BeanFactoryPostProcessor用于处理BeanDefinition
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors());
 
 		// Detect a LoadTimeWeaver and prepare for weaving, if found in the meantime

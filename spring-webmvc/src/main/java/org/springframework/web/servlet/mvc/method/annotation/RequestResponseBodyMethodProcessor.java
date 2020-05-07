@@ -175,6 +175,7 @@ public class RequestResponseBodyMethodProcessor extends AbstractMessageConverter
 
 		mavContainer.setRequestHandled(true);
 		ServletServerHttpRequest inputMessage = createInputMessage(webRequest);
+		// 生成response，这里是怎么将相应发送出去的呢？
 		ServletServerHttpResponse outputMessage = createOutputMessage(webRequest);
 
 		// Try even with null return value. ResponseBodyAdvice could get involved.
